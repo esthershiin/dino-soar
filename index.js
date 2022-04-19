@@ -2715,6 +2715,9 @@ function onDocumentLoad() {
 
 document.addEventListener('DOMContentLoaded', onDocumentLoad);
 
+/* ************
+p5.js PoseNet
+************ */
 
 let video;
 let pn; // poseNet
@@ -2722,29 +2725,27 @@ let pose;
 let skeleton;
 let cnv;
 let ducking = false;
-let jumpY = 150;
+let jumpY = 150; 
 let duckY = 330;
 let canvasX = 640;
 let canvasY = 480;
 
 function centerCanvas() {
-  let x = (windowWidth - width) / 2;
-  let y = (windowHeight - height) / 2;
-  cnv.position(x, y);
+    let x = (windowWidth - width) / 2;
+    let y = (windowHeight - height) / 2;
+    cnv.position(x, y);
 }
 
 function setup() {
-  cnv = createCanvas(canvasX, canvasY); // same dimensions as video
+    cnv = createCanvas(canvasX, canvasY); // same dimensions as video
+    centerCanvas();
 
-  centerCanvas();
-
-  console.log("ml5 version:", ml5.version);
-  
-  video = createCapture(VIDEO);
-  video.hide();
-  
-  pn = ml5.poseNet(video, modelReady);
-  pn.on('pose', gotPoses);
+    console.log("ml5 version:", ml5.version);
+    video = createCapture(VIDEO);
+    video.hide();
+    
+    pn = ml5.poseNet(video, modelReady);
+    pn.on('pose', gotPoses);
 }
 
 function windowResized() {
@@ -2752,87 +2753,83 @@ function windowResized() {
 }
 
 function modelReady() {
-  console.log("model is ready");
+    console.log("model is ready");
 }
 
 let counter = 0;
 
 function gotPoses(result) {
-  if (counter < 3) {
-    console.log(result);
-    counter++;
-  }
-  
-  if (result.length > 0) {
-    pose = result[0].pose;
-    skeleton = result[0].skeleton;
-  }
+    if (counter < 3) {
+        console.log(result);
+        counter++;
+    }
+    if (result.length > 0) {
+        pose = result[0].pose;
+        skeleton = result[0].skeleton;
+    }
 }
 
 function draw() {
-  image(video, 0, 0);
-  // filter(GRAY); // graytone
-  // filter(THRESHOLD); // black & white
-  
-  if (pose) {
-    let le = pose.leftEye;
-    let re = pose.rightEye;
-    let ns = pose.nose;
+    image(video, 0, 0);
     
-    // distance between eye and nose --> used to resize drawings appropriately
-    let d = dist(le.x, le.y, ns.x, ns.y);
-    
-    // draw eye
-    // rectMode(CENTER);
-    // fill(255);
-    // rect(le.x, le.y, d * 0.5);
-    // rect(re.x, re.y, d * 0.5);
-    // fill(0);
-    // rect(le.x, le.y, d * 0.25);
-    // rect(re.x, re.y, d * 0.25);
-    
-    // draw nose
-    // fill(255, 0, 0);
-    // noStroke();
-    // ellipse(ns.x, ns.y, d);
+    stroke(255);
+    drawingContext.setLineDash([10, 10]);
+    line(0, jumpY, canvasX, jumpY);
+    line(0, duckY, canvasX, duckY);
 
-    if (ns.y < jumpY) {
-        // console.log("jumpy jump");
-        runner.tRex.startJump(runner.currentSpeed);
-    } else if (ns.y > duckY) {
-        // console.log("ducky duck");
-        if (!ducking) {
-            runner.tRex.setDuck(true);
-            ducking = true;
+    if (pose) {
+        let le = pose.leftEar;
+        let re = pose.rightEar;
+        let ns = pose.nose;
+
+        // draw nose
+        fill(255);
+        noStroke();
+        ellipse(ns.x, ns.y, 10);
+
+        // draw square
+        let ld = dist(le.x, le.y, ns.x, ns.y);
+        let rd = dist(re.x, re.y, ns.x, ns.y);
+        let d = (ld + rd) / 2;
+
+        push();
+        translate(ns.x, ns.y);
+        stroke(255);
+        noFill();
+        rect(-d, -d, 2 * d, 2 * d);
+        pop();
+        
+        // draw all keypoints (dots + lines)
+        // for (let i = 0; i < 17; i++) {
+        //     ellipse(pose.keypoints[i].position.x, pose.keypoints[i].position.y, 10);
+        // }
+        // for (let i = 0; i < skeleton.length; i++) {
+        //     stroke(255);
+        //     strokeWeight(5);
+        //     line(
+        //         skeleton[i][0].position.x, 
+        //         skeleton[i][0].position.y, 
+        //         skeleton[i][1].position.x, 
+        //         skeleton[i][1].position.y
+        //     );
+        // }
+
+        // Game Control Logic 
+        if (ns.y < jumpY) {
+            // console.log("jumpy jump");
+            runner.tRex.startJump(runner.currentSpeed);
+        } else if (ns.y > duckY) {
+            // console.log("ducky duck");
+            if (!ducking) {
+                runner.tRex.setDuck(true);
+                ducking = true;
+            }
+        } else {
+            // console.log("no jumpy or ducky");
+            if (ducking) {
+                runner.tRex.setDuck(false);
+                ducking = false;
+            }
         }
-    } else {
-        // console.log("no jumpy or ducky");
-        if (ducking) {
-            runner.tRex.setDuck(false);
-            ducking = false;
-        }
     }
-    
-    // draw all keypoints (dots + lines)
-    for (let i = 0; i < 17; i++) {
-      fill(255);
-      ellipse(pose.keypoints[i].position.x, pose.keypoints[i].position.y, 10);
-    }
-    for (let i = 0; i < skeleton.length; i++) {
-      stroke(255);
-      strokeWeight(5);
-      line(
-        skeleton[i][0].position.x, 
-        skeleton[i][0].position.y, 
-        skeleton[i][1].position.x, 
-        skeleton[i][1].position.y
-      );
-    }
-  }
-
-  stroke(255);
-  drawingContext.setLineDash([10, 10]);
-  line(0, jumpY, canvasX, jumpY);
-  line(0, duckY, canvasX, duckY);
-
 }
