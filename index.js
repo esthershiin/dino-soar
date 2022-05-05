@@ -78,7 +78,7 @@
      * Default game width.
      * @const
      */
-    var DEFAULT_WIDTH = 600;
+    var DEFAULT_WIDTH = 0.9 * window.innerWidth;
 
     /**
      * Frames per second.
@@ -365,7 +365,8 @@
             this.canvasCtx = this.canvas.getContext('2d');
             this.canvasCtx.fillStyle = '#f7f7f7';
             this.canvasCtx.fill();
-            Runner.updateCanvasScaling(this.canvas);
+            console.log("scaling canvas");
+            Runner.updateCanvasScaling(this.canvas, 0.9 * window.innerWidth, 0.8 * window.innerHeight);
 
             // Horizon contains clouds, obstacles and the ground.
             this.horizon = new Horizon(this.canvas, this.spriteDef, this.dimensions,
@@ -892,6 +893,7 @@
      * @return {boolean} Whether the canvas was scaled.
      */
     Runner.updateCanvasScaling = function (canvas, opt_width, opt_height) {
+        console.log("updatecanvasscaling");
         var context = canvas.getContext('2d');
 
         // Query the various pixel ratios
@@ -900,21 +902,24 @@
         var ratio = devicePixelRatio / backingStoreRatio;
 
         // Upscale the canvas if the two ratios don't match
-        if (devicePixelRatio !== backingStoreRatio) {
-            var oldWidth = opt_width || canvas.width;
-            var oldHeight = opt_height || canvas.height;
+        
+        var oldWidth = opt_width || canvas.width;
+        var oldHeight = opt_height || canvas.height;
 
-            canvas.width = oldWidth * ratio;
-            canvas.height = oldHeight * ratio;
+        canvas.width = oldWidth * ratio;
+        canvas.height = oldHeight * ratio;
 
-            canvas.style.width = oldWidth + 'px';
-            canvas.style.height = oldHeight + 'px';
+        canvas.style.width = oldWidth + 'px';
+        canvas.style.height = oldHeight + 'px';
 
-            // Scale the context to counter the fact that we've manually scaled
-            // our canvas element.
-            context.scale(ratio, ratio);
-            return true;
-        } else if (devicePixelRatio == 1) {
+        console.log(canvas.style.width);
+        console.log(canvas.style.height);
+
+        // Scale the context to counter the fact that we've manually scaled
+        // our canvas element.
+        context.scale(ratio, ratio);
+
+        if (devicePixelRatio == 1) {
             // Reset the canvas width / height. Fixes scaling bug when the page is
             // zoomed and the devicePixelRatio changes accordingly.
             canvas.style.width = canvas.width + 'px';
@@ -2388,7 +2393,7 @@
      * @enum {number}
      */
     HorizonLine.dimensions = {
-        WIDTH: 600,
+        WIDTH: 0.9 * window.innerWidth,
         HEIGHT: 12,
         YPOS: 127
     };
