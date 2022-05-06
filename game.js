@@ -73,9 +73,8 @@
 
         let speedCheckbox = document.getElementById('checkbox2');
         speedCheckbox.addEventListener("change", () => {
-
             if (speedCheckbox.checked) {
-                this.currentSpeed = 3;
+                this.currentSpeed = 2;
                 speedCheckbox.setAttribute("checked", false);
             } else {
                 this.currentSpeed = 5;
@@ -1477,7 +1476,7 @@
             yPos: [100, 75, 50], // Variable height.
             yPosMobile: [100, 50], // Variable height mobile.
             multipleSpeed: 999,
-            minSpeed: 5, // originally 8.5
+            minSpeed: 0, // originally 8.5
             minGap: 150,
             collisionBoxes: [
                 new CollisionBox(15, 15, 16, 5),
@@ -2739,10 +2738,26 @@ let skeleton;
 let cnv;
 let ducking = false;
 
-let jumpY = 100; 
-let duckY = 200;
 let canvasX = 400;
 let canvasY = 300;
+let jumpY = 100; 
+let duckY = 200;
+
+
+// adjusting jump and duck line 
+let buffer = 5;
+
+let jumpRange = document.getElementById('myJumpRange');
+jumpRange.addEventListener("change", () => {
+    jumpRangeVal = jumpRange.value;
+    jumpY = map(jumpRangeVal, 1, 10, canvasY / 2 - buffer, 0 + buffer);
+});
+
+let duckRange = document.getElementById('myDuckRange');
+duckRange.addEventListener("change", () => {
+    duckRangeVal = duckRange.value;
+    duckY = map(duckRangeVal, 1, 10, canvasY / 2 + buffer, canvasY - buffer);
+});
 
 
 function centerCanvas() {
@@ -2752,11 +2767,12 @@ function centerCanvas() {
 }
 
 function setup() {
-    cnv = createCanvas(canvasX, canvasY); // same dimensions as video
+    cnv = createCanvas(canvasX, canvasY);
     centerCanvas();
 
     console.log("ml5 version:", ml5.version);
     video = createCapture(VIDEO);
+    video.size(canvasX, canvasY);
     video.hide();
     
     pn = ml5.poseNet(video, modelReady);
@@ -2771,13 +2787,7 @@ function modelReady() {
     console.log("model is ready");
 }
 
-let counter = 0;
-
 function gotPoses(result) {
-    if (counter < 3) {
-        console.log(result);
-        counter++;
-    }
     if (result.length > 0) {
         pose = result[0].pose;
         skeleton = result[0].skeleton;
