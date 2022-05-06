@@ -355,6 +355,7 @@
                 this.currentSpeed = opt_speed;
             }
         },
+        
 
         /**
          * Game initialiser.
