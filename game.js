@@ -82,6 +82,7 @@
             }
         });
     }
+
     window['Runner'] = Runner;
 
 
@@ -1831,7 +1832,7 @@
          * @param {boolean} isDucking.
          */
         setDuck: function (isDucking) {
-            if (isDucking && this.status != Trex.status.DUCKING) {
+            if (isDucking && this.status != Trex.status.DUCKING && this.status != Trex.status.JUMPING) {
                 this.update(0, Trex.status.DUCKING);
                 this.ducking = true;
             } else if (this.status == Trex.status.DUCKING) {
@@ -2860,3 +2861,16 @@ function draw() {
         }
     }
 }
+
+let oskiCheckBox = document.getElementById("checkbox1");
+oskiCheckBox.addEventListener("change", () => {
+    let spritesElement = document.getElementById("offline-resources-2x");
+    if (spritesElement.src.includes("200-offline-sprite.png")) {
+        spritesElement.src = "assets/default_200_percent/oski_run9.png";
+    } else {
+        console.log("changed sprites to dino");
+        spritesElement.src = "assets/default_200_percent/200-offline-sprite.png";
+    }
+    runner = new Runner('.interstitial-wrapper');
+
+});
