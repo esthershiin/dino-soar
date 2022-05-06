@@ -54,7 +54,7 @@ img {
 }
 
 .offline .runner-container {
-  height: 300px;
+  height: 150px;
   max-width: 600px;
   overflow: hidden;
   position: absolute;
