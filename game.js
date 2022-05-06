@@ -2726,16 +2726,16 @@ let skeleton;
 let cnv;
 let ducking = false;
 
-let jumpY = 120; 
-let duckY = 240;
-let canvasX = 480;
-let canvasY = 360;
+let jumpY = 100; 
+let duckY = 200;
+let canvasX = 400;
+let canvasY = 300;
 
 
 function centerCanvas() {
     let x = (windowWidth - width) / 2;
     let y = (windowHeight - height) / 2;
-    cnv.position(x, y);
+    cnv.position(x, y + 50);
 }
 
 function setup() {

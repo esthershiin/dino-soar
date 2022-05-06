@@ -5,12 +5,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
     <title >chrome easter egg: t-rex runner</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
     <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="responsive.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet"> 
     <script src="p5/p5.js"></script>
     <script src="p5/p5.min.js"></script>
     <script src="https://unpkg.com/ml5@latest/dist/ml5.min.js"></script>
-    <script src="index.js"></script>
 </head>
 
 <body id="t" class="offline">
@@ -18,6 +19,57 @@
          <h1 style="text-align: center;font-family: 'Open Sans', sans-serif;"></h1>
          <div class="niokbutton" onclick="okbuttonsend()"></div>
     </div>
+    <header id="masthead" class="site-header">
+        <nav id="primary-navigation" class="site-navigation">
+            <div class="container">
+
+                <div class="navbar-header">
+                    <a class="site-title"><span>Dino</span>-soar</a>
+                </div><!-- /.navbar-header -->
+
+                <div class="collapse navbar-collapse" id="agency-navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="active"><a href="index.html">Game</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Settings<i
+                                        class="fa fa-caret-down hidden-xs" aria-hidden="true"></i></a>
+                                <ul class="dropdown-menu checkbox-menu" role="menu" aria-labelledby="menu1">
+                                    <div class="checkbox">
+                                        <input type="checkbox" id="checkbox2" checked="true">
+                                        <label for="checkbox1">Oski Theme!</label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <input type="checkbox" id="checkbox4">
+                                        <label for="checkbox2">Slower</label>
+                                    </div>
+                                    <div class="slidecontainer">
+                                        <label for="myRange">Jump Level</label>
+                                        <input type="range" min="1" max="10" value="5" class="slider" id="myRange">
+                                    </div>
+                                    <div class="slidecontainer">
+                                        <label for="myRange2">Duck Level</label>
+                                        <input type="range" min="1" max="10" value="5" class="slider" id="myRange">
+                                    </div>
+                                </ul>
+                            </li>
+                        </li>
+                        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">GitHub<i
+                                    class="fa fa-caret-down hidden-xs" aria-hidden="true"></i></a>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                                <li><a href="https://github.com/esthershiin/dino-soar"
+                                        target="_blank">Dino-soar</a></li>
+                                <li><a href="https://github.com/esthershiin" target="_blank">Esther Shin</a></li>
+                                <li><a href="https://github.com/danielduan2002" target="_blank">Daniel Duan</a></li>
+                                <li><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">Alanda Nguyen</a></li>
+                                <li><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">Kevin Lee</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav><!-- /.site-navigation -->
+    </header><!-- /#mastheaed -->
+
     <div id="main-frame-error" class="interstitial-wrapper">
         <div id="main-content">
             <div class="icon icon-offline" alt=""></div>
@@ -32,16 +84,33 @@
             </template>
         </div>
     </div>
+
+    <footer id="colophon" class="site-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-sm-4 col-xs-6">
+                    <p>Cubstart Spring 2022 Final Project</p>
+                    <p>Built using p5.js, Bootstrap, and Adobe Photoshop.</p>
+                    <p>
+                    <ul class="list-unstyled contact-links">
+                        <img src="https://calhacks-sierra.s3-us-west-2.amazonaws.com/assets/branding/cubstart.png" style=" object-fit: none; transform: scale(0.11); transform-origin: left top; margin-bottom: -260px; margin-right:
+                -175px; " height="300px" width="205px">
+                        <span id="berk">University of California, Berkeley</span>
+                    </ul>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer><!-- /#footer -->
 </body>
 
-<script>
-    document.onkeydown = function(evt) {
-    evt = evt || window.event;
-    if (evt.keyCode == 32) {
-        var box = document.getElementById("messageBox");
-        box.style.visibility="hidden";
-    }
-};
-</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="bootstrap.min.js"></script>
+<script src="bootstrap-select.min.js"></script>
+<script src="jquery.slicknav.min.js"></script>
+<script src="jquery.countTo.min.js"></script>
+<script src="jquery.shuffle.min.js"></script>
+<script src="script.js"></script>
+<script src="game.js"></script>
     
 </html>
