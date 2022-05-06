@@ -122,7 +122,7 @@
         MIN_JUMP_HEIGHT: 35,
         MOBILE_SPEED_COEFFICIENT: 1.2,
         RESOURCE_TEMPLATE_ID: 'audio-resources',
-        SPEED: 5, // original speed: 6
+        SPEED: 4, // original speed: 6
         SPEED_DROP_COEFFICIENT: 3
     };
 
@@ -1464,7 +1464,7 @@
             yPos: [100, 75, 50], // Variable height.
             yPosMobile: [100, 50], // Variable height mobile.
             multipleSpeed: 999,
-            minSpeed: 8.5,
+            minSpeed: 5, // originally 8.5
             minGap: 150,
             collisionBoxes: [
                 new CollisionBox(15, 15, 16, 5),
@@ -2817,20 +2817,22 @@ function draw() {
         // }
 
         // Game Control Logic 
-        if (ns.y < jumpY) {
-            // console.log("jumpy jump");
-            runner.tRex.startJump(runner.currentSpeed);
-        } else if (ns.y > duckY) {
-            // console.log("ducky duck");
-            if (!ducking) {
-                runner.tRex.setDuck(true);
-                ducking = true;
-            }
-        } else {
-            // console.log("no jumpy or ducky");
-            if (ducking) {
-                runner.tRex.setDuck(false);
-                ducking = false;
+        if (!runner.crashed && runner.playing) {
+            if (ns.y < jumpY) {
+                // console.log("jumpy jump");
+                runner.tRex.startJump(runner.currentSpeed);
+            } else if (ns.y > duckY) {
+                // console.log("ducky duck");
+                if (!ducking) {
+                    runner.tRex.setDuck(true);
+                    ducking = true;
+                }
+            } else {
+                // console.log("no jumpy or ducky");
+                if (ducking) {
+                    runner.tRex.setDuck(false);
+                    ducking = false;
+                }
             }
         }
     }
