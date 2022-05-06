@@ -2725,10 +2725,12 @@ let pose;
 let skeleton;
 let cnv;
 let ducking = false;
+
 let jumpY = 120; 
 let duckY = 240;
 let canvasX = 480;
 let canvasY = 360;
+
 
 function centerCanvas() {
     let x = (windowWidth - width) / 2;
