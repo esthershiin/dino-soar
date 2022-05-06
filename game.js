@@ -70,6 +70,18 @@
         } else {
             this.loadImages();
         }
+
+        let speedCheckbox = document.getElementById('checkbox2');
+        speedCheckbox.addEventListener("change", () => {
+
+            if (speedCheckbox.checked) {
+                this.currentSpeed = 3;
+                speedCheckbox.setAttribute("checked", false);
+            } else {
+                this.currentSpeed = 5;
+                speedCheckbox.setAttribute("checked", true);
+            }
+        });
     }
     window['Runner'] = Runner;
 
@@ -122,7 +134,7 @@
         MIN_JUMP_HEIGHT: 35,
         MOBILE_SPEED_COEFFICIENT: 1.2,
         RESOURCE_TEMPLATE_ID: 'audio-resources',
-        SPEED: 4, // original speed: 6
+        SPEED: 5, // original speed: 6
         SPEED_DROP_COEFFICIENT: 3
     };
 
@@ -343,6 +355,7 @@
                 this.currentSpeed = opt_speed;
             }
         },
+        
 
         /**
          * Game initialiser.
