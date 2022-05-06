@@ -122,7 +122,7 @@
         MIN_JUMP_HEIGHT: 35,
         MOBILE_SPEED_COEFFICIENT: 1.2,
         RESOURCE_TEMPLATE_ID: 'audio-resources',
-        SPEED: 5, // original speed: 6
+        SPEED: 4, // original speed: 6
         SPEED_DROP_COEFFICIENT: 3
     };
 
@@ -1464,7 +1464,7 @@
             yPos: [100, 75, 50], // Variable height.
             yPosMobile: [100, 50], // Variable height mobile.
             multipleSpeed: 999,
-            minSpeed: 8.5,
+            minSpeed: 5, // originally 8.5
             minGap: 150,
             collisionBoxes: [
                 new CollisionBox(15, 15, 16, 5),
