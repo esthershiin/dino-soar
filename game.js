@@ -2757,7 +2757,7 @@ jumpRange.addEventListener("change", () => {
 let duckRange = document.getElementById('myDuckRange');
 duckRange.addEventListener("change", () => {
     duckRangeVal = duckRange.value;
-    duckY = map(duckRangeVal, 1, 10, canvasY / 2 + buffer, canvasY - buffer);
+    duckY = map(duckRangeVal, 1, 10, canvasY - buffer, canvasY / 2 + buffer);
 });
 
 
