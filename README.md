@@ -9,5 +9,9 @@ our own version of the game. Enjoy!
 
 <img width="596" alt="berk-dino-soar" src="https://user-images.githubusercontent.com/46742484/167218064-4ef10f56-fcdd-4944-89cb-3c00aa6f687d.png">
 
+Go Bears!
+
+
 Cubstart, Spring 2022
+
 Creators: Esther Shin, Daniel Duan, Alanda Nguyen, Kevin Lee
