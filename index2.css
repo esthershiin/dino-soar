@@ -9,6 +9,11 @@
     height: 100%;
   }
 
+  #instruction {
+    width: 30em;
+    height: 20em;
+  }
+
   #profile {
     border-radius: 50%;
     width: 15em;
@@ -42,7 +47,7 @@
     margin-bottom: 0;
     font-size: 14px;
     font-weight: 300;
-    color: #9fa3a7;
+    color: #72767b;
     line-height: 22px;
   }
   
@@ -166,7 +171,7 @@
     -o-transition: all 0.25s ease-in-out;
     -ms-transition: all 0.25s ease-in-out;
     cursor: pointer;
-    color: #9fa3a7;
+    color: ##72767b;
   }
   
   a:focus,
@@ -181,7 +186,7 @@
     margin-bottom: 0;
     font-size: 14px;
     font-weight: 300;
-    color: #9fa3a7;
+    color: #72767b;
     line-height: 22px;
   }
   

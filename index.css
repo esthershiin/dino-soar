@@ -37,7 +37,7 @@ img {
   margin-bottom: 0;
   font-size: 14px;
   font-weight: 300;
-  color: #9fa3a7;
+  color: #72767b;
   line-height: 22px;
 }
 
@@ -161,7 +161,7 @@ a {
   -o-transition: all 0.25s ease-in-out;
   -ms-transition: all 0.25s ease-in-out;
   cursor: pointer;
-  color: #9fa3a7;
+  color: #72767b;
 }
 
 a:focus,
@@ -176,7 +176,7 @@ p {
   margin-bottom: 0;
   font-size: 14px;
   font-weight: 300;
-  color: #9fa3a7;
+  color: #72767b;
   line-height: 22px;
 }
 
